@@ -1,0 +1,25 @@
+name: restapi
+version: 1.0
+vendor: XiaoGuo, Liu <xiaoguo.liu@canonical.com>
+summary: REST API
+description: This is the webserver API in python demo
+icon: icon.png
+
+services:
+  mywebserver:
+    description: "A webserver in python"
+    start: python bin/manage.py runserver 8090
+    caps:
+     - network-client
+     - network-service
+
+parts:
+  django:
+    plugin: python2
+    source: .
+    requirements: ./requirements.txt
+
+  restapi:
+    plugin: copy
+    files:
+     ./src: bin
